@@ -7,7 +7,8 @@ import {
     getUserByEmployeeId,
     getAllEmployeeUsers,
     updateUserPassword,
-    verifyUserPassword
+    verifyUserPassword,
+    changeOwnPassword
 } from "../services/userService.js";
 
 import type { CreateUserInput } from "../types/userTypes.js";
@@ -142,6 +143,7 @@ export const changeOwnPasswordController = async (
         }
 
         const { currentPassword, newPassword } = req.body;
+
         if (!currentPassword || !newPassword) {
             res.status(400).json({
                 message: "Current password and new password are required."
@@ -156,32 +158,30 @@ export const changeOwnPasswordController = async (
             return;
         }
 
-        const passwordIsCorrect = await verifyUserPassword(
+        const message = await changeOwnPassword(
             userId,
-            currentPassword
+            currentPassword,
+            newPassword
         );
 
-        if (!passwordIsCorrect) {
-            res.status(400).json({
-                message: "Current password is incorrect."
-            });
-            return;
-        }
-
-        if (currentPassword === newPassword) {
-            res.status(400).json({
-                message: "New password must be different from the current password."
-            });
-            return;
-        }
-
-        await updateUserPassword(userId, newPassword);
-
         res.status(200).json({
-            message: "Password changed successfully!"
+            message
         });
 
     } catch (error) {
+        if (error instanceof Error) {
+            if (
+                error.message === "Current password is incorrect." ||
+                error.message ===
+                    "New password must be different from the current password."
+            ) {
+                res.status(400).json({
+                    message: error.message
+                });
+                return;
+            }
+        }
+
         console.error("Error changing password:", error);
 
         res.status(500).json({

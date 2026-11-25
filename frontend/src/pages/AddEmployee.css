@@ -1,0 +1,94 @@
+.add-employee-page {
+    width: 100%;
+}
+
+.add-employee-header {
+    margin-bottom: 25px;
+}
+
+.add-employee-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.add-employee-card {
+    background-color: white;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 900px;
+}
+
+.add-employee-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 25px;
+}
+
+.add-employee-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-employee-form-group label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-employee-form-group input,
+.add-employee-form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    color: #374151;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-employee-form-group input:focus,
+.add-employee-form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.add-employee-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.add-employee-submit {
+    padding: 11px 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-employee-submit:hover {
+    background-color: #1d4ed8;
+}
+
+@media (max-width: 650px) {
+    .add-employee-card {
+        padding: 20px;
+    }
+
+    .add-employee-form {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .add-employee-actions {
+        flex-direction: column;
+    }
+}

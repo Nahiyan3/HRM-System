@@ -7,6 +7,8 @@ import {
     updateSection
 } from "../services/sectionService";
 
+import "./EditSection.css"
+
 function EditSection() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -53,23 +55,35 @@ function EditSection() {
     if (!section) return <p>Section not found.</p>;
 
     return (
-        <div>
-            <h1>Edit Section</h1>
+        <div className="edit-section-page">
+            <div className="edit-section-header">
+                <h1>Edit Section</h1>
+            </div>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Section Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+            <div className="edit-section-card">
+                <form onSubmit={handleSubmit} className="edit-section-form">
+                    <div className="edit-section-form-group">
+                        <label>Section Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter section name"
+                            required
+                        />
+                    </div>
 
-                <button type="submit">Update Section</button>
-            </form>
+                    <div className="edit-section-actions">
+                        <button
+                            type="submit"
+                            className="edit-section-submit"
+                        >
+                            Update Section
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,132 @@
+.edit-my-profile-page {
+    width: 100%;
+}
+
+.edit-my-profile-header {
+    margin-bottom: 25px;
+}
+
+.edit-my-profile-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.edit-my-profile-card {
+    background-color: white;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 700px;
+}
+
+.edit-my-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.edit-my-profile-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-my-profile-form-group label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.edit-my-profile-form-group input,
+.edit-my-profile-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    color: #374151;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.edit-my-profile-form-group input:focus,
+.edit-my-profile-form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.edit-my-profile-form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.edit-my-profile-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.edit-my-profile-save {
+    padding: 11px 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.edit-my-profile-save:hover {
+    background-color: #1d4ed8;
+}
+
+.edit-my-profile-cancel {
+    padding: 11px 20px;
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.edit-my-profile-cancel:hover {
+    background-color: #4b5563;
+}
+
+.edit-my-profile-message {
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.edit-my-profile-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.edit-my-profile-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 650px) {
+    .edit-my-profile-card {
+        padding: 20px;
+    }
+
+    .edit-my-profile-actions {
+        flex-direction: column;
+    }
+
+    .edit-my-profile-save,
+    .edit-my-profile-cancel {
+        width: 100%;
+    }
+}

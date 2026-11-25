@@ -12,6 +12,8 @@ import type {
     EmployeeUser
 } from "../types/auth";
 
+import "./UserManagement.css";
+
 const UserManagement = () => {
     const [formData, setFormData] = useState<CreateUserInput>({
         email: "",
@@ -152,71 +154,82 @@ const UserManagement = () => {
             }
         });
 
+
     return (
-        <div>
+        <div className="user-management-page">
             <h1>Employee Account Management</h1>
 
-            <h2>Create Employee Account</h2>
+            {/* Create Employee Account */}
+            <div className="user-management-card">
+                <h2>Create Employee Account</h2>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="employee_id">Employee ID</label>
-                    <input
-                        id="employee_id"
-                        name="employee_id"
-                        type="number"
-                        value={formData.employee_id || ""}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className="user-form">
+                    <div className="user-form-group">
+                        <label htmlFor="employee_id">Employee ID</label>
+                        <input
+                            id="employee_id"
+                            name="employee_id"
+                            type="number"
+                            value={formData.employee_id || ""}
+                            onChange={handleChange}
+                            required
+                            min="1"
+                        />
+                    </div>
 
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                    <div className="user-form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        minLength={8}
-                    />
-                </div>
+                    <div className="user-form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            minLength={8}
+                        />
+                    </div>
 
-                <button type="submit">
-                    Create Account
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="user-primary-button"
+                    >
+                        Create Account
+                    </button>
+                </form>
+            </div>
 
+            {/* Success and Error Messages */}
             {message && (
-                <p style={{ color: "green" }}>{message}</p>
+                <p className="user-message-success">{message}</p>
             )}
 
             {error && (
-                <p style={{ color: "red" }}>{error}</p>
+                <p className="user-message-error">{error}</p>
             )}
 
-            <hr />
-
+            {/* Employee Accounts */}
             <h2>Employee Accounts</h2>
 
-            <h3>Total Accounts: {users.length}</h3>
+            <div className="user-summary">
+                <h3>Total Accounts</h3>
+                <p>{users.length}</p>
+            </div>
 
-            <div>
+            {/* Search and Sorting */}
+            <div className="user-filters">
                 <input
                     type="text"
                     placeholder="Search by name, email or employee code"
@@ -238,12 +251,13 @@ const UserManagement = () => {
                 </select>
             </div>
 
+            {/* Employee Accounts Table */}
             {loading ? (
                 <p>Loading employee accounts...</p>
             ) : filteredUsers.length === 0 ? (
                 <p>No employee accounts found.</p>
             ) : (
-                <table>
+                <table className="user-table">
                     <thead>
                         <tr>
                             <th>Employee Code</th>
@@ -259,20 +273,16 @@ const UserManagement = () => {
                         {filteredUsers.map((user) => (
                             <tr key={user.id}>
                                 <td>{user.employee_code}</td>
-
                                 <td>
                                     {user.first_name} {user.last_name}
                                 </td>
-
                                 <td>{user.email}</td>
-
                                 <td>{user.position || "-"}</td>
-
                                 <td>{user.section_name || "-"}</td>
-
                                 <td>
                                     <button
                                         type="button"
+                                        className="reset-password-button"
                                         onClick={() => {
                                             setSelectedUserId(user.id);
                                             setNewPassword("");
@@ -289,14 +299,16 @@ const UserManagement = () => {
                 </table>
             )}
 
+            {/* Reset Employee Password */}
             {selectedUserId !== null && (
-                <div>
-                    <hr />
-
+                <div className="reset-password-section">
                     <h2>Reset Employee Password</h2>
 
-                    <form onSubmit={handleResetPassword}>
-                        <div>
+                    <form
+                        onSubmit={handleResetPassword}
+                        className="user-form"
+                    >
+                        <div className="user-form-group">
                             <label htmlFor="newPassword">
                                 New Password
                             </label>
@@ -313,12 +325,16 @@ const UserManagement = () => {
                             />
                         </div>
 
-                        <button type="submit">
+                        <button
+                            type="submit"
+                            className="user-primary-button"
+                        >
                             Update Password
                         </button>
 
                         <button
                             type="button"
+                            className="user-secondary-button"
                             onClick={() => {
                                 setSelectedUserId(null);
                                 setNewPassword("");
@@ -332,6 +348,7 @@ const UserManagement = () => {
             )}
         </div>
     );
+
 };
 
 export default UserManagement;

@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { getEmployeeById } from "../services/employeeService";
 
 import type { Employee } from "../types/employee";
-
+import "./MyProfile.css"
 const MyProfile = () => {
     const { user } = useAuth();
 
@@ -47,24 +47,96 @@ const MyProfile = () => {
     }
 
     return (
-        <div>
-            <h1>My Profile</h1>
+        <div className="my-profile-page">
+            <div className="my-profile-header">
+                <h1>My Profile</h1>
+            </div>
 
-            <h2>Personal Information</h2>
-            <p><strong>First Name:</strong> {employee.first_name}</p>
-            <p><strong>Last Name:</strong> {employee.last_name}</p>
-            <p><strong>Date of Birth:</strong> {employee.date_of_birth || "Not provided"}</p>
-            <p><strong>Gender:</strong> {employee.gender || "Not provided"}</p>
-            <p><strong>Phone:</strong> {employee.phone || "Not provided"}</p>
-            <p><strong>Address:</strong> {employee.address || "Not provided"}</p>
-            <p><strong>Email:</strong> {employee.email}</p>
+            <div className="my-profile-card">
+                <h2>Personal Information</h2>
 
-            <h2>Employment Information</h2>
-            <p><strong>Employee ID:</strong> {employee.employee_code}</p>
-            <p><strong>Section:</strong> {employee.section_name || "Not assigned"}</p>
-            <p><strong>Position:</strong> {employee.position || "Not assigned"}</p>
-            <p><strong>Employment Type:</strong> {employee.employee_type || "Not provided"}</p>
-            <p><strong>Date Joined:</strong> {employee.date_joined}</p>
+                <div className="my-profile-grid">
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">First Name</span>
+                        <span className="my-profile-value">{employee.first_name}</span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Last Name</span>
+                        <span className="my-profile-value">{employee.last_name}</span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Date of Birth</span>
+                        <span className="my-profile-value">
+                            {employee.date_of_birth || "Not provided"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Gender</span>
+                        <span className="my-profile-value">
+                            {employee.gender || "Not provided"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Phone</span>
+                        <span className="my-profile-value">
+                            {employee.phone || "Not provided"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Email</span>
+                        <span className="my-profile-value">{employee.email}</span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Address</span>
+                        <span className="my-profile-value">
+                            {employee.address || "Not provided"}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="my-profile-card">
+                <h2>Employment Information</h2>
+
+                <div className="my-profile-grid">
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Employee ID</span>
+                        <span className="my-profile-value">{employee.employee_code}</span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Section</span>
+                        <span className="my-profile-value">
+                            {employee.section_name || "Not assigned"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Position</span>
+                        <span className="my-profile-value">
+                            {employee.position || "Not assigned"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Employment Type</span>
+                        <span className="my-profile-value">
+                            {employee.employee_type || "Not provided"}
+                        </span>
+                    </div>
+
+                    <div className="my-profile-item">
+                        <span className="my-profile-label">Date Joined</span>
+                        <span className="my-profile-value">{employee.date_joined}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

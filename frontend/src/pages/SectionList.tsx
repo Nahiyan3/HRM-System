@@ -6,6 +6,7 @@ import {
     deleteSection
 } from "../services/sectionService";
 import { Link } from "react-router-dom";
+import "./SectionList.css";
 
 function SectionList() {
     const [sections, setSections] = useState<Section[]>([]);
@@ -66,25 +67,31 @@ function SectionList() {
         .sort((a, b) => {
             const comparison = a.name.localeCompare(b.name);
 
-            return sortOrder === "asc"
-                ? comparison
-                : -comparison;
+            return sortOrder === "asc" ? comparison : -comparison;
         });
 
     return (
         <div className="section-page">
-            <h1>Section Management</h1>
+            <div className="section-header">
+                <h1>Section Management</h1>
 
-            <Link to="/sections/new">
-                Add Section
-            </Link>
+                <Link
+                    to="/sections/new"
+                    className="add-section-button"
+                >
+                    + Add Section
+                </Link>
+            </div>
 
-            <h3>Total Sections: {sections.length}</h3>
+            <div className="section-summary">
+                <h3>Total Sections</h3>
+                <p>{sections.length}</p>
+            </div>
 
             <div className="section-filters">
                 <input
                     type="text"
-                    placeholder="Search sections by name"
+                    placeholder="Search sections by name..."
                     value={searchTerm}
                     onChange={(event) =>
                         setSearchTerm(event.target.value)
@@ -97,16 +104,16 @@ function SectionList() {
                         setSortOrder(event.target.value)
                     }
                 >
-                    <option value="asc">A to Z</option>
-                    <option value="desc">Z to A</option>
+                    <option value="asc">Name: A to Z</option>
+                    <option value="desc">Name: Z to A</option>
                 </select>
             </div>
 
-            <p>
+            <p className="section-count">
                 Showing {filteredSections.length} of {sections.length} sections
             </p>
 
-            <table>
+            <table className="section-table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -124,11 +131,13 @@ function SectionList() {
                                 <td>
                                     <Link
                                         to={`/sections/${section.id}/edit`}
+                                        className="section-action-link section-edit-link"
                                     >
                                         Edit
                                     </Link>
 
                                     <button
+                                        className="section-delete-button"
                                         onClick={() =>
                                             handleDelete(section.id)
                                         }
@@ -140,7 +149,7 @@ function SectionList() {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan={3}>
+                            <td colSpan={3} className="no-sections">
                                 No sections found.
                             </td>
                         </tr>

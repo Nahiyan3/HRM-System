@@ -1,0 +1,70 @@
+.my-profile-page {
+    width: 100%;
+}
+
+.my-profile-header {
+    margin-bottom: 25px;
+}
+
+.my-profile-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.my-profile-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+}
+
+.my-profile-card h2 {
+    margin: 0 0 22px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1f2937;
+    font-size: 18px;
+}
+
+.my-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 30px;
+}
+
+.my-profile-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.my-profile-label {
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.my-profile-value {
+    color: #1f2937;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.my-profile-message {
+    padding: 18px;
+    background-color: white;
+    border-radius: 8px;
+    color: #4b5563;
+}
+
+@media (max-width: 650px) {
+    .my-profile-card {
+        padding: 20px;
+    }
+
+    .my-profile-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}

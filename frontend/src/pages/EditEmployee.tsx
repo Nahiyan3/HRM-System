@@ -9,6 +9,7 @@ import {
 } from "../services/employeeService";
 import type { Section } from "../types/section";
 import { getAllSections } from "../services/sectionService";
+import "./EditEmployee.css";
 function EditEmployee() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -63,7 +64,9 @@ function EditEmployee() {
             last_name: formData.last_name,
             email: formData.email,
             date_joined: formData.date_joined.slice(0, 10),
-            section_id: formData.section_id
+            section_id: formData.section_id,
+            position: formData.position,
+            employee_type: formData.employee_type
         };
 
         try {
@@ -84,97 +87,151 @@ function EditEmployee() {
         return <p>Employee not found.</p>;
     }
 
+
     return (
-        <div>
-            <h1>Edit Employee</h1>
+        <div className="edit-employee-page">
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Employee Code</label>
-                    <input
-                        type="text"
-                        name="employee_code"
-                        value={formData.employee_code}
-                        readOnly
-                    />
-                </div>
+            <div className="edit-employee-header">
+                <h1>Edit Employee</h1>
+            </div>
 
-                <div>
-                    <label>First Name</label>
-                    <input
-                        type="text"
-                        name="first_name"
-                        value={formData.first_name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+            <div className="edit-employee-card">
 
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        type="text"
-                        name="last_name"
-                        value={formData.last_name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <form onSubmit={handleSubmit}>
 
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Section</label>
+                    <div className="edit-employee-form">
 
-                    <select
-                        name="section_id"
-                        value={formData.section_id ?? ""}
-                        onChange={(event) =>
-                            setFormData((previousData) => {
-                                if (!previousData) return null;
+                        <div className="edit-employee-form-group">
+                            <label>Employee Code</label>
+                            <input
+                                type="text"
+                                name="employee_code"
+                                value={formData.employee_code}
+                                readOnly
+                            />
+                        </div>
 
-                                return {
-                                    ...previousData,
-                                    section_id: event.target.value
-                                        ? Number(event.target.value)
-                                        : null
-                                };
-                            })
-                        }
-                    >
-                        <option value="">Select a Section</option>
+                        <div className="edit-employee-form-group">
+                            <label>First Name</label>
+                            <input
+                                type="text"
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                        {sections.map((section) => (
-                            <option key={section.id} value={section.id}>
-                                {section.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                        <div className="edit-employee-form-group">
+                            <label>Last Name</label>
+                            <input
+                                type="text"
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <div>
-                    <label>Date Joined</label>
-                    <input
-                        type="date"
-                        name="date_joined"
-                        value={formData.date_joined.slice(0, 10)}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                        <div className="edit-employee-form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <button type="submit">Update Employee</button>
-            </form>
+                        <div className="edit-employee-form-group">
+                            <label>Section</label>
+                            <select
+                                name="section_id"
+                                value={formData.section_id ?? ""}
+                                onChange={(event) =>
+                                    setFormData((previousData) => {
+                                        if (!previousData) return null;
+
+                                        return {
+                                            ...previousData,
+                                            section_id: event.target.value
+                                                ? Number(event.target.value)
+                                                : null
+                                        };
+                                    })
+                                }
+                            >
+                                <option value="">Select a Section</option>
+
+                                {sections.map((section) => (
+                                    <option
+                                        key={section.id}
+                                        value={section.id}
+                                    >
+                                        {section.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="edit-employee-form-group">
+                            <label>Position</label>
+                            <input
+                                type="text"
+                                name="position"
+                                value={formData.position ?? ""}
+                                onChange={handleChange}
+                                placeholder="Enter employee position"
+                            />
+                        </div>
+
+                        <div className="edit-employee-form-group">
+                            <label>Employee Type</label>
+                            <input
+                                type="text"
+                                name="employee_type"
+                                value={formData.employee_type ?? ""}
+                                onChange={handleChange}
+                                placeholder="e.g. Full-time, Part-time"
+                            />
+                        </div>
+
+                        <div className="edit-employee-form-group">
+                            <label>Date Joined</label>
+                            <input
+                                type="date"
+                                name="date_joined"
+                                value={formData.date_joined.slice(0, 10)}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                    </div>
+
+                    <div className="edit-employee-actions">
+                        <button
+                            type="submit"
+                            className="edit-employee-submit"
+                        >
+                            Update Employee
+                        </button>
+
+                        <a
+                            href={`/employees/${id}`}
+                            className="edit-employee-cancel"
+                        >
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
     );
+
 }
 
 export default EditEmployee;

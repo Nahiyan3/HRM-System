@@ -21,7 +21,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./components/layouts/AdminLayout";
-import EmployeeLayout from "./components/layouts/Employeelayout";
+import EmployeeLayout from "./components/layouts/EmployeeLayout";
 
 function App() {
     return (

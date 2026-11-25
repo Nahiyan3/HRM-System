@@ -112,3 +112,28 @@ export const verifyUserPassword = async (
 
     return bcrypt.compare(currentPassword, user.password_hash);
 };
+
+export const changeOwnPassword = async (
+    userId: number,
+    currentPassword: string,
+    newPassword: string
+): Promise<string> => {
+    const passwordIsCorrect = await verifyUserPassword(
+        userId,
+        currentPassword
+    );
+
+    if (!passwordIsCorrect) {
+        throw new Error("Current password is incorrect.");
+    }
+
+    if (currentPassword === newPassword) {
+        throw new Error(
+            "New password must be different from the current password."
+        );
+    }
+
+    await updateUserPassword(userId, newPassword);
+
+    return "Password changed successfully!";
+};

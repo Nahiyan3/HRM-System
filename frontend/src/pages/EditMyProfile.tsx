@@ -7,6 +7,7 @@ import {
     getEmployeeById,
     updateOwnProfile
 } from "../services/employeeService";
+import "./EditMyProfile.css"
 
 const EditMyProfile = () => {
     const { user } = useAuth();
@@ -89,51 +90,75 @@ const EditMyProfile = () => {
     }
 
     return (
-        <div>
-            <h1>Edit My Profile</h1>
+        <div className="edit-my-profile-page">
+            <div className="edit-my-profile-header">
+                <h1>Edit My Profile</h1>
+            </div>
 
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
+            <div className="edit-my-profile-card">
+                {message && (
+                    <p className="edit-my-profile-message edit-my-profile-success">
+                        {message}
+                    </p>
+                )}
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Phone Number</label>
-                    <input
-                        type="text"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                    />
-                </div>
+                {error && (
+                    <p className="edit-my-profile-message edit-my-profile-error">
+                        {error}
+                    </p>
+                )}
 
-                <div>
-                    <label>Address</label>
-                    <textarea
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className="edit-my-profile-form">
+                    <div className="edit-my-profile-form-group">
+                        <label>Phone Number</label>
+                        <input
+                            type="text"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="Enter your phone number"
+                        />
+                    </div>
 
-                <div>
-                    <label>Profile Picture URL</label>
-                    <input
-                        type="text"
-                        name="profile_picture"
-                        value={formData.profile_picture}
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div className="edit-my-profile-form-group">
+                        <label>Address</label>
+                        <textarea
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                            placeholder="Enter your address"
+                        />
+                    </div>
 
-                <button type="submit">Save Changes</button>
+                    <div className="edit-my-profile-form-group">
+                        <label>Profile Picture URL</label>
+                        <input
+                            type="text"
+                            name="profile_picture"
+                            value={formData.profile_picture}
+                            onChange={handleChange}
+                            placeholder="Enter your profile picture URL"
+                        />
+                    </div>
 
-                <button
-                    type="button"
-                    onClick={() => navigate("/my-profile")}
-                >
-                    Cancel
-                </button>
-            </form>
+                    <div className="edit-my-profile-actions">
+                        <button
+                            type="submit"
+                            className="edit-my-profile-save"
+                        >
+                            Save Changes
+                        </button>
+
+                        <button
+                            type="button"
+                            className="edit-my-profile-cancel"
+                            onClick={() => navigate("/my-profile")}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

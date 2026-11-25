@@ -250,12 +250,29 @@ function EmployeeList() {
                                 <td>
                                     <Link
                                         to={`/employees/${employee.id}`}
+                                        style={{
+                                            display: "inline-block",
+                                            padding: "6px 12px",
+                                            backgroundColor: "#2563eb",
+                                            color: "white",
+                                            textDecoration: "none",
+                                            borderRadius: "5px",
+                                            marginRight: "8px"
+                                        }}
                                     >
                                         View
                                     </Link>
 
                                     <Link
                                         to={`/employees/${employee.id}/edit`}
+                                        style={{
+                                            display: "inline-block",
+                                            padding: "6px 12px",
+                                            backgroundColor: "#16a34a",
+                                            color: "white",
+                                            textDecoration: "none",
+                                            borderRadius: "5px"
+                                        }}
                                     >
                                         Edit
                                     </Link>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import { changeOwnPassword } from "../services/userService";
+import "./ChangePassword.css"
 
 const ChangePassword = () => {
     const [formData, setFormData] = useState({
@@ -59,50 +60,70 @@ const ChangePassword = () => {
     };
 
     return (
-        <div>
-            <h1>Change Password</h1>
+        <div className="change-password-page">
+            <div className="change-password-header">
+                <h1>Change Password</h1>
+            </div>
 
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
+            <div className="change-password-card">
+                {message && (
+                    <p className="change-password-message change-password-success">
+                        {message}
+                    </p>
+                )}
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Current Password</label>
-                    <input
-                        type="password"
-                        name="currentPassword"
-                        value={formData.currentPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                {error && (
+                    <p className="change-password-message change-password-error">
+                        {error}
+                    </p>
+                )}
 
-                <div>
-                    <label>New Password</label>
-                    <input
-                        type="password"
-                        name="newPassword"
-                        value={formData.newPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className="change-password-form">
+                    <div className="change-password-form-group">
+                        <label>Current Password</label>
+                        <input
+                            type="password"
+                            name="currentPassword"
+                            value={formData.currentPassword}
+                            onChange={handleChange}
+                            placeholder="Enter current password"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label>Confirm New Password</label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                    <div className="change-password-form-group">
+                        <label>New Password</label>
+                        <input
+                            type="password"
+                            name="newPassword"
+                            value={formData.newPassword}
+                            onChange={handleChange}
+                            placeholder="Enter new password"
+                            required
+                        />
+                    </div>
 
-                <button type="submit" disabled={loading}>
-                    {loading ? "Changing Password..." : "Change Password"}
-                </button>
-            </form>
+                    <div className="change-password-form-group">
+                        <label>Confirm New Password</label>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            placeholder="Confirm new password"
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="change-password-submit"
+                        disabled={loading}
+                    >
+                        {loading ? "Changing Password..." : "Change Password"}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,106 @@
+
+.employee-details-page {
+    width: 100%;
+}
+
+.employee-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.employee-details-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.employee-details-card {
+    background-color: white;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.employee-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 35px;
+}
+
+.employee-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.employee-detail-label {
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.employee-detail-value {
+    color: #1f2937;
+    font-size: 15px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.employee-code {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.employee-details-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+.employee-back-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.employee-back-button:hover {
+    background-color: #1d4ed8;
+}
+
+.employee-details-message {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    color: #4b5563;
+}
+
+.employee-details-error {
+    color: #b91c1c;
+    background-color: #fee2e2;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+@media (max-width: 650px) {
+    .employee-details-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .employee-details-card {
+        padding: 20px;
+    }
+
+    .employee-details-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+}

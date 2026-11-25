@@ -1,0 +1,102 @@
+
+.section-page {
+    width: 100%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.add-section-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-section-button:hover {
+    background-color: #1d4ed8;
+}
+
+.section-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.section-table th,
+.section-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.section-table th {
+    background-color: #f9fafb;
+    color: #374151;
+    font-size: 14px;
+}
+
+.section-table td {
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.section-table tr:last-child td {
+    border-bottom: none;
+}
+
+.section-action-link {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    margin-right: 8px;
+}
+
+.section-edit-link {
+    background-color: #16a34a;
+}
+
+.section-edit-link:hover {
+    background-color: #15803d;
+}
+
+.section-delete-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #dc2626;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.section-delete-button:hover {
+    background-color: #b91c1c;
+}
+
+.no-sections {
+    padding: 25px;
+    text-align: center;
+    color: #6b7280;
+    background-color: white;
+    border-radius: 8px;
+}

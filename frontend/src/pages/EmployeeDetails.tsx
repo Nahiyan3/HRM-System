@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import type { Employee } from "../types/employee";
 import { getEmployeeById } from "../services/employeeService";
+import "./EmployeeDetails.css";
 
 function EmployeeDetails() {
     const { id } = useParams<{ id: string }>();
@@ -27,33 +28,157 @@ function EmployeeDetails() {
     }, [id]);
 
     if (loading) {
-        return <p>Loading employee details...</p>;
+        return (
+            <p className="employee-details-message">
+                Loading employee details...
+            </p>
+        );
     }
 
     if (error || !employee) {
-        return <p>{error || "Employee not found."}</p>;
+        return (
+            <p className="employee-details-error">
+                {error || "Employee not found."}
+            </p>
+        );
     }
 
     return (
-        <div>
-            <h1>Employee Details</h1>
+        <div className="employee-details-page">
 
-            <p><strong>Employee Code:</strong> {employee.employee_code}</p>
-            <p><strong>First Name:</strong> {employee.first_name}</p>
-            <p><strong>Last Name:</strong> {employee.last_name}</p>
-            <p><strong>Email:</strong> {employee.email}</p>
-            <p><strong>Date of Birth:</strong> {employee.date_of_birth || "N/A"}</p>
-            <p><strong>Gender:</strong> {employee.gender || "N/A"}</p>
-            <p><strong>Phone:</strong> {employee.phone || "N/A"}</p>
-            <p><strong>Address:</strong> {employee.address || "N/A"}</p>
-            <p><strong>Section:</strong> {employee.section_name || "N/A"}</p>
-            <p><strong>Position:</strong> {employee.position || "N/A"}</p>
-            <p><strong>Employee Type:</strong> {employee.employee_type || "N/A"}</p>
-            <p><strong>Date Joined:</strong> {employee.date_joined}</p>
+            <div className="employee-details-header">
+                <h1>Employee Details</h1>
+            </div>
 
-            <Link to="/employees">Back to Employees</Link>
+            <div className="employee-details-card">
+
+                <div className="employee-details-grid">
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Employee Code
+                        </span>
+                        <span className="employee-detail-value employee-code">
+                            {employee.employee_code}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            First Name
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.first_name}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Last Name
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.last_name}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Email
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.email}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Date of Birth
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.date_of_birth
+                                ? employee.date_of_birth.slice(0, 10)
+                                : "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Gender
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.gender || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Phone
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.phone || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Address
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.address || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Section
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.section_name || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Position
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.position || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Employee Type
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.employee_type || "N/A"}
+                        </span>
+                    </div>
+
+                    <div className="employee-detail-item">
+                        <span className="employee-detail-label">
+                            Date Joined
+                        </span>
+                        <span className="employee-detail-value">
+                            {employee.date_joined.slice(0, 10)}
+                        </span>
+                    </div>
+
+                </div>
+
+                <div className="employee-details-actions">
+                    <Link
+                        to="/employees"
+                        className="employee-back-button"
+                    >
+                        Back to Employees
+                    </Link>
+                </div>
+
+            </div>
         </div>
     );
 }
 
 export default EmployeeDetails;
+

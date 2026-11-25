@@ -1,0 +1,86 @@
+.edit-section-page {
+    width: 100%;
+}
+
+.edit-section-header {
+    margin-bottom: 25px;
+}
+
+.edit-section-header h1 {
+    margin: 0;
+    color: #1f2937;
+}
+
+.edit-section-card {
+    background-color: white;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 600px;
+}
+
+.edit-section-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.edit-section-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-section-form-group label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.edit-section-form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    color: #374151;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.edit-section-form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.edit-section-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.edit-section-submit {
+    padding: 11px 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.edit-section-submit:hover {
+    background-color: #1d4ed8;
+}
+
+@media (max-width: 650px) {
+    .edit-section-card {
+        padding: 20px;
+    }
+
+    .edit-section-submit {
+        width: 100%;
+    }
+}
