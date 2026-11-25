@@ -1,4 +1,4 @@
-import type { LoginInput, LoginResponse } from "../types/auth";
+import type { LoginInput, LoginResponse, RegisterAdminInput } from "../types/auth";
 
 const API_URL = "http://localhost:5000/api/auth";
 
@@ -17,6 +17,26 @@ export const login = async (
 
     if (!response.ok) {
         throw new Error(result.message || "Login failed.");
+    }
+
+    return result;
+};
+
+export const registerAdmin = async (
+    registrationData: RegisterAdminInput
+): Promise<{ message: string }> => {
+    const response = await fetch(`${API_URL}/register-admin`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registrationData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.message || "Admin registration failed.");
     }
 
     return result;

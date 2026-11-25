@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import type { LoginInput } from "../types/auth";
+import { Link } from "react-router-dom";
 import "../pages/Login.css";
 
 const Login = () => {
@@ -104,6 +105,10 @@ const Login = () => {
                     </button>
 
                 </form>
+                <div className="login-register-link">
+                    Don't have an admin account?{" "}
+                    <Link to="/register-admin">Register here</Link>
+                </div>
 
                 <div className="login-footer">
                     HRM System &copy; 2026

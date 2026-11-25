@@ -22,6 +22,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./components/layouts/AdminLayout";
 import EmployeeLayout from "./components/layouts/EmployeeLayout";
+import RegisterAdmin from "./pages/RegisterAdmin";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
 
                 {/* Public Route */}
                 <Route path="/login" element={<Login />} />
+                <Route path="/register-admin" element={<RegisterAdmin />} />
 
                 {/* Admin Routes */}
                 <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>

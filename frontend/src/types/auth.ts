@@ -35,3 +35,9 @@ export interface EmployeeUser {
     position: string | null;
     section_name: string | null;
 }
+
+export interface RegisterAdminInput {
+    email: string;
+    password: string;
+    registrationKey: string;
+}
