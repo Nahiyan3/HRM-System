@@ -14,7 +14,6 @@ const PORT = 5000;
 // Middleware
 app.use(express.json());
 app.use("/api/employees", employeeRoutes);
-app.use("/api/employees", employeeRoutes);
 app.use("/api/sections", sectionRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
