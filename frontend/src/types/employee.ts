@@ -48,3 +48,13 @@ export interface UpdateEmployeeInput {
     employee_type?: string | null;
     date_joined?: string;
 }
+
+export interface EmployeeWithoutAccount {
+    id: number;
+    employee_code: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    position: string | null;
+    section_name: string | null;
+}

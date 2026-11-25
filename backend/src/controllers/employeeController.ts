@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createEmployee, getAllEmployees, getEmployeeById, updateEmployee, deleteEmployee, updateOwnProfile, getEmployeeCountBySection, getTotalEmployeeCount } from "../services/employeeService.js";
+import { createEmployee, getAllEmployees, getEmployeeById, updateEmployee, deleteEmployee, updateOwnProfile, getEmployeeCountBySection, getTotalEmployeeCount, getEmployeesWithoutAccounts } from "../services/employeeService.js";
 
 export const createEmployeeController = async (
     req: Request,
@@ -215,6 +215,26 @@ export const getEmployeeStatisticsController = async (
 
         res.status(500).json({
             message: "Failed to retrieve employee statistics."
+        });
+    }
+};
+
+export const getEmployeesWithoutAccountsController = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    try {
+        const employees = await getEmployeesWithoutAccounts();
+
+        res.status(200).json({
+            message: "Employees without accounts retrieved successfully.",
+            data: employees
+        });
+    } catch (error) {
+        console.error("Error retrieving employees without accounts:", error);
+
+        res.status(500).json({
+            message: "Failed to retrieve employees without accounts."
         });
     }
 };

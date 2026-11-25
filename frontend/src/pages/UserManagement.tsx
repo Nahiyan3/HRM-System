@@ -12,6 +12,14 @@ import type {
     EmployeeUser
 } from "../types/auth";
 
+import {
+    getEmployeesWithoutAccounts
+} from "../services/employeeService";
+
+import type {
+    EmployeeWithoutAccount
+} from "../types/employee";
+
 import "./UserManagement.css";
 
 const UserManagement = () => {
@@ -22,6 +30,7 @@ const UserManagement = () => {
     });
 
     const [users, setUsers] = useState<EmployeeUser[]>([]);
+    const [availableEmployees, setAvailableEmployees] = useState<EmployeeWithoutAccount[]>([]);
     const [loading, setLoading] = useState(true);
 
     const [message, setMessage] = useState("");
@@ -37,8 +46,15 @@ const UserManagement = () => {
         try {
             const data = await getAllEmployeeUsers();
             setUsers(data);
+
+            const employees = await getEmployeesWithoutAccounts();
+            setAvailableEmployees(employees);
         } catch (error) {
-            setError("Failed to load employee accounts.");
+            setError(
+                error instanceof Error
+                    ? error.message
+                    : "Failed to load employee accounts."
+            );
         } finally {
             setLoading(false);
         }
@@ -47,6 +63,17 @@ const UserManagement = () => {
     useEffect(() => {
         fetchUsers();
     }, []);
+
+    const handleEmployeeChange = (
+        e: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        const employeeId = Number(e.target.value);
+
+        setFormData({
+            ...formData,
+            employee_id: employeeId
+        });
+    };
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -64,6 +91,11 @@ const UserManagement = () => {
 
         setMessage("");
         setError("");
+
+        if (formData.employee_id === 0) {
+            setError("Please select an employee.");
+            return;
+        }
 
         if (formData.password.length < 8) {
             setError("Password must be at least 8 characters long.");
@@ -154,7 +186,6 @@ const UserManagement = () => {
             }
         });
 
-
     return (
         <div className="user-management-page">
             <h1>Employee Account Management</h1>
@@ -164,21 +195,44 @@ const UserManagement = () => {
                 <h2>Create Employee Account</h2>
 
                 <form onSubmit={handleSubmit} className="user-form">
+
                     <div className="user-form-group">
-                        <label htmlFor="employee_id">Employee ID</label>
-                        <input
+                        <label htmlFor="employee_id">
+                            Select Employee
+                        </label>
+
+                        <select
                             id="employee_id"
-                            name="employee_id"
-                            type="number"
                             value={formData.employee_id || ""}
-                            onChange={handleChange}
+                            onChange={handleEmployeeChange}
                             required
-                            min="1"
-                        />
+                        >
+                            <option value="">
+                                Select an employee
+                            </option>
+
+                            {availableEmployees.map((employee) => (
+                                <option
+                                    key={employee.id}
+                                    value={employee.id}
+                                >
+                                    {employee.first_name} {employee.last_name}
+                                    {" - "}
+                                    {employee.employee_code}
+                                </option>
+                            ))}
+                        </select>
+
+                        {availableEmployees.length === 0 && !loading && (
+                            <small>
+                                All employees already have accounts.
+                            </small>
+                        )}
                     </div>
 
                     <div className="user-form-group">
                         <label htmlFor="email">Email</label>
+
                         <input
                             id="email"
                             name="email"
@@ -191,6 +245,7 @@ const UserManagement = () => {
 
                     <div className="user-form-group">
                         <label htmlFor="password">Password</label>
+
                         <input
                             id="password"
                             name="password"
@@ -205,13 +260,13 @@ const UserManagement = () => {
                     <button
                         type="submit"
                         className="user-primary-button"
+                        disabled={availableEmployees.length === 0}
                     >
                         Create Account
                     </button>
                 </form>
             </div>
 
-            {/* Success and Error Messages */}
             {message && (
                 <p className="user-message-success">{message}</p>
             )}
@@ -220,7 +275,6 @@ const UserManagement = () => {
                 <p className="user-message-error">{error}</p>
             )}
 
-            {/* Employee Accounts */}
             <h2>Employee Accounts</h2>
 
             <div className="user-summary">
@@ -228,7 +282,6 @@ const UserManagement = () => {
                 <p>{users.length}</p>
             </div>
 
-            {/* Search and Sorting */}
             <div className="user-filters">
                 <input
                     type="text"
@@ -251,7 +304,6 @@ const UserManagement = () => {
                 </select>
             </div>
 
-            {/* Employee Accounts Table */}
             {loading ? (
                 <p>Loading employee accounts...</p>
             ) : filteredUsers.length === 0 ? (
@@ -273,12 +325,15 @@ const UserManagement = () => {
                         {filteredUsers.map((user) => (
                             <tr key={user.id}>
                                 <td>{user.employee_code}</td>
+
                                 <td>
                                     {user.first_name} {user.last_name}
                                 </td>
+
                                 <td>{user.email}</td>
                                 <td>{user.position || "-"}</td>
                                 <td>{user.section_name || "-"}</td>
+
                                 <td>
                                     <button
                                         type="button"
@@ -299,7 +354,6 @@ const UserManagement = () => {
                 </table>
             )}
 
-            {/* Reset Employee Password */}
             {selectedUserId !== null && (
                 <div className="reset-password-section">
                     <h2>Reset Employee Password</h2>
@@ -348,7 +402,6 @@ const UserManagement = () => {
             )}
         </div>
     );
-
 };
 
 export default UserManagement;

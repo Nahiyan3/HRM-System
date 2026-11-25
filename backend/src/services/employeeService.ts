@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 import { CREATE_EMPLOYEE_QUERY } from "../queries/employeeQueries.js";
 import { CreateEmployeeInput, Employee, UpdateEmployeeInput } from "../types/employeeTypes.js";
-import { GET_ALL_EMPLOYEES_QUERY, GET_EMPLOYEE_BY_ID_QUERY, UPDATE_EMPLOYEE_QUERY, DELETE_EMPLOYEE_QUERY, UPDATE_OWN_PROFILE_QUERY, GET_EMPLOYEE_COUNT_BY_SECTION_QUERY, GET_TOTAL_EMPLOYEE_COUNT_QUERY } from "../queries/employeeQueries.js";
+import { GET_ALL_EMPLOYEES_QUERY, GET_EMPLOYEE_BY_ID_QUERY, UPDATE_EMPLOYEE_QUERY, DELETE_EMPLOYEE_QUERY, UPDATE_OWN_PROFILE_QUERY, GET_EMPLOYEE_COUNT_BY_SECTION_QUERY, GET_TOTAL_EMPLOYEE_COUNT_QUERY, GET_EMPLOYEES_WITHOUT_ACCOUNTS_QUERY } from "../queries/employeeQueries.js";
 
 export const createEmployee = async (employeeData: CreateEmployeeInput) => {
     const values = [
@@ -111,6 +111,14 @@ export const getTotalEmployeeCount = async (): Promise<number> => {
 export const getEmployeeCountBySection = async () => {
     const result = await pool.query(
         GET_EMPLOYEE_COUNT_BY_SECTION_QUERY
+    );
+
+    return result.rows;
+};
+
+export const getEmployeesWithoutAccounts = async () => {
+    const result = await pool.query(
+        GET_EMPLOYEES_WITHOUT_ACCOUNTS_QUERY
     );
 
     return result.rows;

@@ -2,7 +2,8 @@
 import type {
     Employee,
     CreateEmployeeInput,
-    UpdateEmployeeInput
+    UpdateEmployeeInput,
+    EmployeeWithoutAccount
 } from "../types/employee";
 
 const API_URL = "http://localhost:5000/api/employees";
@@ -121,6 +122,23 @@ export const getEmployeeStatistics = async (): Promise<EmployeeStatistics> => {
 
     if (!response.ok) {
         throw new Error(result.message || "Failed to fetch employee statistics");
+    }
+
+    return result.data;
+};
+
+export const getEmployeesWithoutAccounts = async (): Promise<EmployeeWithoutAccount[]> => {
+    const response = await fetch(`${API_URL}/without-accounts`, {
+        method: "GET",
+        headers: getAuthHeaders()
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.message || "Failed to fetch employees without accounts"
+        );
     }
 
     return result.data;

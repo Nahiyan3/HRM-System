@@ -8,7 +8,8 @@ import {
     updateEmployeeController,
     deleteEmployeeController,
     updateOwnProfileController,
-    getEmployeeStatisticsController
+    getEmployeeStatisticsController,
+    getEmployeesWithoutAccountsController
 } from "../controllers/employeeController.js";
 
 import { validateRequest } from "../middleware/validateRequest.js";
@@ -62,6 +63,13 @@ router.delete(
     deleteEmployeeController
 );
 
+router.get(
+    "/without-accounts",
+    roleMiddleware("ADMIN"),
+    getEmployeesWithoutAccountsController
+);
+
+
 // Admins can view any profile.
 // Employees can only view their own profile.
 router.get(
@@ -69,6 +77,7 @@ router.get(
     employeeAccessMiddleware,
     getEmployeeByIdController
 );
+
 
 
 export default router;

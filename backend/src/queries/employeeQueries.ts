@@ -92,3 +92,21 @@ export const GET_EMPLOYEE_COUNT_BY_SECTION_QUERY = `
     GROUP BY s.id, s.name
     ORDER BY s.name ASC;
 `;
+
+export const GET_EMPLOYEES_WITHOUT_ACCOUNTS_QUERY = `
+    SELECT
+        employees.id,
+        employees.employee_code,
+        employees.first_name,
+        employees.last_name,
+        employees.email,
+        employees.position,
+        sections.name AS section_name
+    FROM employees
+    LEFT JOIN users
+        ON employees.id = users.employee_id
+    LEFT JOIN sections
+        ON employees.section_id = sections.id
+    WHERE users.id IS NULL
+    ORDER BY employees.first_name ASC;
+`;
